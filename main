@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
+#include <time.h>
 
+
+
+//----------------------- MODO PLAYER VS PLAYER FUNÇÕES---------------------
 char jogo[3][3];
 int linha, coluna;
 
-//função para colocar espaços vazios na matriz
+//Função para colocar espaços vazios na matriz
 void gerarTabuleiro() {
 	for(linha = 0; linha < 3; linha++) {
 		for(coluna = 0; coluna < 3; coluna++) {
@@ -13,7 +18,7 @@ void gerarTabuleiro() {
 	}
 }
 
-//função que ira imprimir o tabuleiro na tela
+//Função para imprimir o tabuleiro na tela
 void tabuleiro() {
 	printf("\n\n\t 0   1   2\n\n");
 	for(linha = 0; linha < 3; linha++) {
@@ -36,7 +41,7 @@ void tabuleiro() {
 	}
 }
 
-//função que ira verificar se alguem ganhou na linha 1
+//Função que ira verificar se alguem ganhou na linha 1
 int verificarLinha(int linha, char coluna) {
 	if(jogo[linha][0] == coluna && jogo[linha][1] == coluna && jogo[linha][2] == coluna) {
 		return 1;
@@ -46,8 +51,8 @@ int verificarLinha(int linha, char coluna) {
 	}
 }
 
-/*função que ira verificar se alguem ganhou em todas as linhas
-(se retornar 1 ele ganha, e se retornar 0 o jogo continua)*/
+/*Função que ira verificar se alguem ganhou em todas as linhas
+(se retornar 1 é considerado vitória, se retornar 0 o jogo continua)*/
 int verificarLinhas(char coluna) {
 	int ganhou = 0;
 	for(linha = 0; linha < 3; linha++) {
@@ -56,7 +61,7 @@ int verificarLinhas(char coluna) {
 	return ganhou;
 }
 
-//função que ira verificar se alguem ganhou em apenas uma coluna
+// Função que ira verificar se alguem ganhou em apenas uma coluna
 int verificarColuna(int coluna, char j) {
 	if(jogo[0][coluna] == j && jogo[1][coluna] == j && jogo[2][coluna] == j) {
 		return 1;
@@ -66,8 +71,8 @@ int verificarColuna(int coluna, char j) {
 	}
 }
 
-/*função que ira verificar se alguem ganhou em todas as colunas 
-(se retornar 1 ele ganha, e se retornar 0 o jogo continua) */
+/*Função que ira verificar se alguem ganhou em todas as colunas 
+(se retornar 1 é considerado vitória, se retornar 0 o jogo continua) */
 int verificarColunas(char j) {
 	int ganhou = 0;
 	for(coluna = 0; coluna < 3; coluna++) {
@@ -76,8 +81,8 @@ int verificarColunas(char j) {
 	return ganhou;
 }
 
-/*função que verifica se alguem ganhou em uma das diagonais
-(se retornar 1 ele ganha, e se retornar 0 o jogo continua) */
+/*Função que verifica se alguem ganhou em uma das diagonais
+(se retornar 1 é considerado vitória, se retornar 0 o jogo continua) */
 int verificarDiag1(char coluna) {
 	if(jogo[0][0] == coluna && jogo[1][1] == coluna && jogo[2][2] == coluna) {
 		return 1;
@@ -87,8 +92,8 @@ int verificarDiag1(char coluna) {
 	}
 }
 
-/*função que verifica se alguem ganhou em uma das diagonais
-(se retornar 1 ele ganha, e se retornar 0 o jogo continua) */
+/*Função que verifica se alguem ganhou em uma das diagonais
+(se retornar 1 é considerado vitória, se retornar 0 o jogo continua) */
 int verificarDiag2(char coluna) {
 	if(jogo[0][2] == coluna && jogo[1][1] == coluna && jogo[2][0] == coluna) {
 		return 1;
@@ -98,7 +103,7 @@ int verificarDiag2(char coluna) {
 	}
 }
 
-//função que valida as coordenadas digitadas
+//Função que valida as coordenadas digitadas
 int validar(int linha, int coluna) {
 	if(linha >= 0 && linha < 3 && coluna >= 0 && coluna < 3 && jogo[linha][coluna] == ' '){
 		return 1;
@@ -108,27 +113,27 @@ int validar(int linha, int coluna) {
 	}
 }
 
-//função para ler as coordeanadas enviadas e armazenalas
+//Função para ler as coordeanadas enviadas e armazenar
 void Coordenadas(char j){
 	int l, c;
 	
-	printf("digite a linha que deseja marcar: ");
+	printf("Digite a linha que deseja marcar: ");
 	scanf("%d", &l);
 	
-	printf("digite a coluna que deseja marcar: ");
+	printf("Digite a coluna que deseja marcar: ");
 	scanf("%d", &c);
 	
 	while(validar(l,c) == 0) {
-		printf("digite uma linha valida: ");
+		printf("Escolha uma posição válida. Digite a linha que deseja marcar: ");
 		scanf("%d", &l);
 	
-		printf("digite uma coluna valida: ");
+		printf("Digite a coluna que deseja marcar: ");
 		scanf("%d", &c);
 	}
 	jogo[l][c] = j;
 }
 
-//função que calcula a quantidade de casas vazias dentro do tabuleiro
+//Função que calcula a quantidade de casas vazias dentro do tabuleiro
 int quantVazias() {
 	int quantidade = 0;
 	
@@ -142,9 +147,9 @@ int quantVazias() {
 	return quantidade;
 }
 
-/* função que ira fazer a verificação de ganhador e que ira trocar o simbolo marcado no tabuleiro(X,0)
+/*Função que ira fazer a verificação de ganhador e que ira trocar o simbolo marcado no tabuleiro(X,O)
 a cada rodada*/
-void jogada() {
+int jogada() {
 	int jogador = 1, vitoriaX = 0, vitoria0 = 0;
 	char jogador1 = 'X', jogador2 = '0';
 	
@@ -171,29 +176,84 @@ void jogada() {
 	tabuleiro();
 	
 	if(vitoria0 == 1) {
-		printf("\n parabens jogador 2 voce ganhou!\n");
+		printf("\nParabéns Jogador 2 você ganhou!\n");
+		return 2;
 	}
 	else if(vitoriaX == 1) {
-		printf("\n parabens jogador 1 voce ganhou!\n");
+		printf("\nParabéns Jogador 1 você ganhou!\n");
+		return 1;
 	}
 	else {
-		printf("\n que pena, deu empate!\n");
+		printf("\nQue pena, deu empate!\n");
 	}
 }
 
+// Criando a função de imprimir o placar com os parâmetros de jogador como ponteiro
+void placar(int resultado, int *jogador1, int *jogador2){
+	
+
+	if(resultado == 1){
+		(*jogador1)++;
+	}
+	if(resultado == 2){
+		(*jogador2)++;	
+	}
+		
+
+	printf("Placar: \n %d x %d \n", *jogador1, *jogador2);
+
+}
+//----------------------------------- FIM DAS FUNÇÕES DO MODO PVP ---------------------------------
+
+
 
 int main () {
-	int opcao;
+
+    setLocale(LC_ALL,"");
+    int opcaoMenu; // Vai gerenciar a opção do Menu
+    int opcao; // Gerencia se o jogador que está no modo PvP quer continuar jogando
+	
+    
+    /*Parâmetros do modo PvP*/
+	int resultado = 0;
+	int jogador1 = 0;
+	int jogador2 = 0;
 	
 	do{
-	
-		gerarTabuleiro();
-		jogada();
+        printf("___ MENU ___\n");
+        printf("1. Jogar contra outro jogador\n");
+        printf("2. Jogar contra a máquina (opção não implementada ainda)\n");
+        printf("0. Sair do jogo\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcaoMenu);
+
+        switch (opcaoMenu) {
+            case 1:
+                // Código para jogar contra outro jogador
+                printf("Você escolheu jogar contra outro jogador!\n");
+                do{
+                    gerarTabuleiro();
+		            resultado = jogada();
 		
-		printf("\n digite 1 para jogar novamente e 0 para voltar ao menu: ");
-		scanf("%d", &opcao);
-	}while(opcao == 1);
-	
-	return 0;
+                    placar(resultado, &jogador1, &jogador2);
+		
+		            printf("\nDigite 1 para jogar novamente e 0 para voltar ao menu: ");
+		            scanf("%d", &opcao);
+                } while(opcao == 1);
+                break;
+            case 2:
+                // Código para jogar contra a máquina (a ser implementado)
+                printf("Desculpe, essa opção ainda não foi implementada.\n");
+                break;
+            case 0:
+                printf("Saindo do jogo...\n");
+                return 0; // Termina o programa
+            default:
+                printf("Opção inválida! Por favor, escolha uma opção válida.\n");
+                break;
+        }
+
+
+    } while (opcaoMenu != 0);
 	
 }
