@@ -1,8 +1,8 @@
-# jogo-da-velha-em-C
+# JOGO DA VELHA
 
 Participantes:
-Caio Kleivson
-Pedro
-Paulo Mariano
-Filipe
-Daniel Costa
+Caio Kleivson;
+Pedro;
+Paulo Mariano;
+Filipe;
+Daniel Costa;
