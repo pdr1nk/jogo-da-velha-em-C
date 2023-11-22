@@ -276,7 +276,7 @@ int main () {
                 limparPlacar(&jogador1, &jogador2);
                 break;
             case 2:
-                // Código para jogar contra a máquina (a ser implementado)
+                // Código para mostrar créditos
                 printf("\n\tCREDITOS DO JOGO\n\n");
                 printf("-Pedro Henrique de Brito\n");
                 printf("-Daniel da Costa Bezerril\n");
@@ -285,7 +285,7 @@ int main () {
                 printf("-Caio Kleivson Serafim Galdino\n");
                 break;
             case 3:
-                // Código para jogar contra a máquina (a ser implementado)
+                // Código para mostrar regras
                 printf("\n\tREGRAS:\n");
                 printf("\nDois jogares irão fazer jogadas alternadas por rodadas no tabuleiro\nO primeiro será o X e outro o O. Ganha o jogo aquele que primeiro\nfizer uma sequência de 3 na horizontal, na vertical ou na diagnoal\nBoa sorte e bom jogo!\n");
                 break;
