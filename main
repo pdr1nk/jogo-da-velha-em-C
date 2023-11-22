@@ -123,15 +123,26 @@ int validar(int linha, int coluna) {
 	}
 }
 
+// Função para obrigar o usuário a digitar uma casa válida
+int receberEntrada() {
+    int entrada;
+    while (scanf("%d", &entrada) != 1) {
+        printf("Entrada inválida. Digite um número: ");
+        while (getchar() != '\n'); // Limpa o buffer de entrada
+    }
+    return entrada;
+}
+
+
 //Função para ler as coordeanadas enviadas e armazenar
 void Coordenadas(char j){
-	int l, c;
-	
-	printf("\nDigite a linha que deseja marcar: ");
-	scanf("%d", &l);
-	
-	printf("\nDigite a coluna que deseja marcar: ");
-	scanf("%d", &c);
+    int l, c;
+
+    printf("\nDigite a linha que deseja marcar: ");
+    l = receberEntrada();
+
+    printf("\nDigite a coluna que deseja marcar: ");
+    c = receberEntrada();
 	
 	while(validar(l,c) == 0) {
 		printf("\nEscolha uma posição válida. Digite a linha que deseja marcar: ");
