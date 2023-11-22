@@ -287,7 +287,7 @@ int main () {
             case 3:
                 // Código para mostrar regras
                 printf("\n\tREGRAS:\n");
-                printf("\nDois jogares irão fazer jogadas alternadas por rodadas no tabuleiro\nO primeiro será o X e outro o O. Ganha o jogo aquele que primeiro\nfizer uma sequência de 3 na horizontal, na vertical ou na diagnoal\nBoa sorte e bom jogo!\n");
+                printf("\nDois jogares irão fazer jogadas alternadas por rodadas no tabuleiro\nO primeiro será o X e outro o O. Ganha o jogo aquele que primeiro\nfizer uma sequência de 3 na horizontal, na vertical ou na diagonal\nBoa sorte e bom jogo!\n");
                 break;
             case 0:
                 printf("Saindo do jogo...\n");
