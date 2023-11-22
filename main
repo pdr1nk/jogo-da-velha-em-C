@@ -146,10 +146,10 @@ void Coordenadas(char j){
 	
 	while(validar(l,c) == 0) {
 		printf("\nEscolha uma posição válida. Digite a linha que deseja marcar: ");
-		scanf("%d", &l);
+		l = receberEntrada();
 	
 		printf("\nDigite a coluna que deseja marcar: ");
-		scanf("%d", &c);
+		c = receberEntrada();
 	}
 	jogo[l][c] = j;
 }
